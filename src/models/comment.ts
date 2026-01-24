@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const commentSchema: Schema = new Schema(
     {
@@ -7,7 +7,11 @@ const commentSchema: Schema = new Schema(
             ref: "Post",
             required: true
         },
-        userName: { type: String, required: true },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
         content: { type: String, required: true }
     },
     { timestamps: true }

@@ -12,8 +12,8 @@ const createPost = async (req: Request, res: Response) => {
 
 const getPosts = async (req: Request, res: Response) => {
     try {
-        const filter = req.query.sender ? { userName: req.query.sender } : {};
-        const posts = await Post.find(filter);
+        const filter = req.query.userId ? { userId: req.query.userId } : {};
+        const posts = await Post.find(filter).populate('userId', 'username email');
         res.send(posts);
     } catch (error) {
         res.status(500).send((error as Error).message);
@@ -22,7 +22,7 @@ const getPosts = async (req: Request, res: Response) => {
 
 const getPostById = async (req: Request, res: Response) => {
     try {
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(req.params.postId).populate('userId', 'username email');
         if (post) res.send(post);
         else res.status(404).send("Post not found");
     } catch (error) {

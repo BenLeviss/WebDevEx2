@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user";
+import Post from "../models/post";
+import Comment from "../models/comment";
 
 // Create a new user
 const createUser = async (req: Request, res: Response) => {
@@ -120,10 +122,32 @@ const deleteUserById = async (req: Request, res: Response) => {
     }
 };
 
+// Get all posts by a specific user
+const getUserPosts = async (req: Request, res: Response) => {
+    try {
+        const posts = await Post.find({ userId: req.params.userId }).populate('userId', 'username email');
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: (error as Error).message });
+    }
+};
+
+// Get all comments by a specific user
+const getUserComments = async (req: Request, res: Response) => {
+    try {
+        const comments = await Comment.find({ userId: req.params.userId }).populate('userId', 'username email');
+        res.json(comments);
+    } catch (error) {
+        res.status(500).json({ error: (error as Error).message });
+    }
+};
+
 export default {
     createUser,
     getAllUsers,
     getUserById,
+    getUserPosts,
+    getUserComments,
     updateUserById,
     deleteUserById
 };

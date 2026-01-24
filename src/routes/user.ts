@@ -9,6 +9,12 @@ router.post("/", userController.createUser);
 // Get all users
 router.get("/", userController.getAllUsers);
 
+// Get all posts by a specific user
+router.get("/:userId/posts", userController.getUserPosts);
+
+// Get all comments by a specific user
+router.get("/:userId/comments", userController.getUserComments);
+
 // Get user by ID
 router.get("/:userId", userController.getUserById);
 
