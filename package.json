@@ -1,0 +1,38 @@
+{
+  "name": "spotly",
+  "version": "1.0.0",
+  "description": "Spotly is an app that allows users to discover, share, and recommend unique places.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts",
+    "build": "rimraf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenLeviss/WebDevEx2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BenLeviss/WebDevEx2/issues"
+  },
+  "homepage": "https://github.com/BenLeviss/WebDevEx2#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.10",
+    "nodemon": "^3.1.11",
+    "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
