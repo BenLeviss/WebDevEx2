@@ -77,6 +77,13 @@ const getUserById = async (req: Request, res: Response) => {
 // Update user by ID
 const updateUserById = async (req: Request, res: Response) => {
     try {
+        // Check if user is updating their own profile
+        if (req.params.userId !== (req as any).user.userId) {
+            return res.status(403).json({
+                error: "You can only update your own profile"
+            });
+        }
+
         const { username, email, firstName, lastName, bio } = req.body;
 
         // Don't allow password updates through this endpoint
@@ -107,6 +114,13 @@ const updateUserById = async (req: Request, res: Response) => {
 // Delete user by ID
 const deleteUserById = async (req: Request, res: Response) => {
     try {
+        // Check if user is deleting their own account
+        if (req.params.userId !== (req as any).user.userId) {
+            return res.status(403).json({
+                error: "You can only delete your own account"
+            });
+        }
+
         const user = await User.findByIdAndDelete(req.params.userId).select('-password');
 
         if (!user) {
