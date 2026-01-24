@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 
 import postRouter from "./routes/posts";
 import commentRouter from "./routes/comment";
+import userRouter from "./routes/user";
+
 
 const app: Express = express();
 app.use(express.json());
@@ -26,6 +28,8 @@ db.once("open", () => console.log("Connected to MongoDB"));
 
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
+app.use("/user", userRouter);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
