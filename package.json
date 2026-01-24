@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/BenLeviss/WebDevEx2#readme",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.0.1"
