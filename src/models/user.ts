@@ -38,6 +38,10 @@ const userSchema: Schema = new Schema(
         bio: {
             type: String,
             maxlength: 500
+        },
+        refreshTokens: {
+            type: [String],
+            default: []
         }
     },
     {
