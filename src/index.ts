@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import postRouter from "./routes/posts";
 import commentRouter from "./routes/comment";
 import userRouter from "./routes/user";
+import authRouter from "./routes/auth";
 
 
 const app: Express = express();
@@ -26,6 +27,7 @@ const db = mongoose.connection;
 db.on("error", (error) => console.error("Database Error:", error));
 db.once("open", () => console.log("Connected to MongoDB"));
 
+app.use("/auth", authRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 app.use("/user", userRouter);

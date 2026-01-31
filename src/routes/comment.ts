@@ -1,17 +1,19 @@
 import express from "express";
 const commentRouter = express.Router();
 import commentController from "../controllers/comment";
+import { authenticate } from "../middleware/auth";
 
-// Get a All Comments
-commentRouter.get("/", commentController.getAllComments);
+// All comment routes require authentication
+// Get All Comments
+commentRouter.get("/", authenticate, commentController.getAllComments);
 
 // Get a Comment by ID
-commentRouter.get("/:commentId", commentController.getCommentById);
+commentRouter.get("/:commentId", authenticate, commentController.getCommentById);
 
 // Update a Comment by ID
-commentRouter.put("/:commentId", commentController.updateCommentById);
+commentRouter.put("/:commentId", authenticate, commentController.updateCommentById);
 
 // Delete a Comment by ID
-commentRouter.delete("/:commentId", commentController.deleteCommentById);
+commentRouter.delete("/:commentId", authenticate, commentController.deleteCommentById);
 
-export default commentRouter; 
+export default commentRouter;
