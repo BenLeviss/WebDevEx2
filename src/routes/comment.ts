@@ -5,10 +5,10 @@ import { authenticate } from "../middleware/auth";
 
 // All comment routes require authentication
 // Get All Comments
-commentRouter.get("/", authenticate, commentController.getAllComments);
+commentRouter.get("/", commentController.getAllComments);
 
 // Get a Comment by ID
-commentRouter.get("/:commentId", authenticate, commentController.getCommentById);
+commentRouter.get("/:commentId", commentController.getCommentById);
 
 // Update a Comment by ID
 commentRouter.put("/:commentId", authenticate, commentController.updateCommentById);

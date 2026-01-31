@@ -4,10 +4,13 @@
   "description": "Spotly is an app that allows users to discover, share, and recommend unique places.",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/user.test.ts",
+    "test-user": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/user.test.ts",
+    "test-post": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/post.test.ts",
+    "test-comment": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/comment.test.ts",
+    "test-auth": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/post.test.ts",
     "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "rimraf dist && tsc"
   },
   "repository": {

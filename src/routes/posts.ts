@@ -1,18 +1,19 @@
 import express from "express";
-const postRouter = express.Router();
 import postsController from "../controllers/posts";
 import commentController from "../controllers/comment";
 import { authenticate } from "../middleware/auth";
+
+const postRouter = express.Router();
 
 // All post routes require authentication
 // Add a New Post
 postRouter.post("/", authenticate, postsController.createPost);
 
 // Get All Posts
-postRouter.get("/", authenticate, postsController.getPosts);
+postRouter.get("/", postsController.getPosts);
 
 // Get a Post by ID
-postRouter.get("/:postId", authenticate, postsController.getPostById);
+postRouter.get("/:postId", postsController.getPostById);
 
 // Update a Post
 postRouter.put("/:postId", authenticate, postsController.updatePostById);
@@ -24,6 +25,6 @@ postRouter.delete("/:postId", authenticate, postsController.deletePostById);
 postRouter.post("/:postId/comment", authenticate, commentController.createComment);
 
 // Get all comment for a post 
-postRouter.get("/:postId/comment", authenticate, commentController.getCommentsByPost);
+postRouter.get("/:postId/comment", commentController.getCommentsByPost);
 
 export default postRouter;

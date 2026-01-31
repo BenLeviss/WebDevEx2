@@ -3,16 +3,16 @@ dotenv.config();
 
 import express, { Express } from "express";
 import mongoose from "mongoose";
-
 import postRouter from "./routes/posts";
 import commentRouter from "./routes/comment";
 import userRouter from "./routes/user";
 import authRouter from "./routes/auth";
+
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
-app.use("/post", postRouter);
-app.use("/comment", commentRouter);
+app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
