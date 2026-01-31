@@ -45,7 +45,7 @@ const getCommentById = async (req: Request, res: Response) => {
     try {
         const comment = await Comment.findById(req.params.commentId).populate('userId', 'username email');
         if (!comment) {
-            return res.status(404).json({ error: "Comment not found" });
+            return res.status(401).json({ error: "Comment not found" });
         }
         res.json(comment);
     } catch (error) {
@@ -83,7 +83,7 @@ const deleteCommentById = async (req: Request, res: Response) => {
         // First, find the comment to check ownership
         const comment = await Comment.findById(req.params.commentId);
         if (!comment) {
-            return res.status(404).json({ error: "Comment not found" });
+            return res.status(401).json({ error: "Comment not found" });
         }
 
         // Check if user owns the comment
