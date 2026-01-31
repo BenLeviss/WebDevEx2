@@ -1,13 +1,6 @@
 import { Express } from "express";
 import request from "supertest";
 
-// A tiny smoke test so Jest recognizes this file as a test suite
-describe("utils helpers (smoke)", () => {
-    it("has helper exports", () => {
-        expect(true).toBe(true);
-    });
-});
-
 /**
  * Helper function to register a new user
  */

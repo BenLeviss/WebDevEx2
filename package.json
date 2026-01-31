@@ -8,6 +8,7 @@
     "test-post": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/post.test.ts",
     "test-comment": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/comment.test.ts",
     "test-auth": "tsc && jest --env-file=.env.test --runInBand --detectOpenHandles --forceExit ./src/tests/post.test.ts",
+    "test": "tsc && jest --detectOpenHandles --coverage --forceExit",
     "prestart": "npm run build",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
@@ -37,16 +38,11 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
-  "swaggerDependencies": {
-    "swagger-ui-express": "^4.6.3",
-    "swagger-jsdoc": "^6.2.8"
-  },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.0.10",
     "@types/supertest": "^6.0.3",
-    "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
 // Get secrets from environment variables
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'your-access-token-secret';
@@ -27,8 +28,11 @@ export const generateAccessToken = (payload: TokenPayload): string => {
  * Generate a refresh token (long-lived)
  */
 export const generateRefreshToken = (payload: TokenPayload): string => {
+    // include a unique jwtid so consecutive tokens differ even if issued within the same second
+    const jwtid = crypto.randomBytes(16).toString('hex');
     return (jwt.sign as any)(payload, REFRESH_TOKEN_SECRET, {
-        expiresIn: REFRESH_TOKEN_EXPIRY
+        expiresIn: REFRESH_TOKEN_EXPIRY,
+        jwtid,
     });
 };
 
