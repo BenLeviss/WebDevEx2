@@ -65,7 +65,7 @@ const getUserById = async (req: Request, res: Response) => {
         const user = await User.findById(req.params.userId).select('-password');
 
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(401).json({ error: "User not found" });
         }
 
         res.json(user);
@@ -102,7 +102,7 @@ const updateUserById = async (req: Request, res: Response) => {
         ).select('-password');
 
         if (!updatedUser) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(401).json({ error: "User not found" });
         }
 
         res.json(updatedUser);
@@ -124,7 +124,7 @@ const deleteUserById = async (req: Request, res: Response) => {
         const user = await User.findByIdAndDelete(req.params.userId).select('-password');
 
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(401).json({ error: "User not found" });
         }
 
         res.json({

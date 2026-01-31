@@ -7,6 +7,8 @@ import postRouter from "./routes/posts";
 import commentRouter from "./routes/comment";
 import userRouter from "./routes/user";
 import authRouter from "./routes/auth";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./swagger";
 
 const app = express();
 app.use(express.json());
@@ -15,6 +17,7 @@ app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const initApp = () => {
   const promise = new Promise<Express>((resolve, reject) => {
