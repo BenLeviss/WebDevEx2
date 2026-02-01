@@ -4,7 +4,7 @@ import request from "supertest";
 import Post from "../models/post";
 import User from "../models/user";
 import initApp from "../app";
-import { createUserAndLogin, sampleUser } from "./utils.test";
+import { createUserAndLogin, sampleUser, sampleUser2 } from "./utils.test";
 
 describe("Post API Tests", () => {
     let app: Express;
@@ -48,6 +48,21 @@ describe("Post API Tests", () => {
 
             expect(response.status).toBe(401);
         });
+
+            it('should forbid update by non-owner', async () => {
+                // create a post as initial user
+                const post = await Post.create({ title: 'Owned', content: 'x', userId });
+
+                // create second user and login
+                const otherToken = await createUserAndLogin(app, sampleUser2);
+
+                const res = await request(app)
+                    .put(`/posts/${post._id}`)
+                    .set('Authorization', `Bearer ${otherToken}`)
+                    .send({ title: 'New Title' });
+
+                expect(res.status).toBe(403);
+            });
     });
 
     describe("GET /posts - Get All Posts", () => {
@@ -151,6 +166,17 @@ describe("Post API Tests", () => {
                 .delete(`/posts/${post._id}`);
 
             expect(response.status).toBe(401);
+        });
+
+        it('should forbid delete by non-owner', async () => {
+            const post = await Post.create({ title: 'Other delete', content: 'x', userId });
+            const otherToken = await createUserAndLogin(app, sampleUser2);
+
+            const res = await request(app)
+                .delete(`/posts/${post._id}`)
+                .set('Authorization', `Bearer ${otherToken}`);
+
+            expect(res.status).toBe(403);
         });
     });
 });

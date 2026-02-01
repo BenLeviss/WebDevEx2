@@ -8,6 +8,10 @@ module.exports = {
         'src/**/*.ts',
         '!src/**/*.d.ts',
     ],
+    coveragePathIgnorePatterns: [
+        '/src/server.ts',
+        '/src/tests/utils.ts'
+    ],
     testTimeout: 30000,
 };
 

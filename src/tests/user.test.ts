@@ -107,6 +107,20 @@ describe("User API Tests", () => {
 
             expect(response.status).toBe(401);
         });
+
+        it('should forbid updating another user', async () => {
+            const token = await createUserAndLogin(app, sampleUser);
+            const otherToken = await createUserAndLogin(app, sampleUser2);
+
+            const user = await User.findOne({ email: sampleUser.email });
+
+            const res = await request(app)
+                .put(`/user/${user?._id}`)
+                .set('Authorization', `Bearer ${otherToken}`)
+                .send({ firstName: 'Nope' });
+
+            expect(res.status).toBe(403);
+        });
     });
 
     describe("DELETE /user/:userId - Delete User", () => {
@@ -130,6 +144,19 @@ describe("User API Tests", () => {
                 .delete("/user/123456789012345678901234");
 
             expect(response.status).toBe(401);
+        });
+
+        it('should forbid deleting another user', async () => {
+            const token = await createUserAndLogin(app, sampleUser);
+            const otherToken = await createUserAndLogin(app, sampleUser2);
+
+            const user = await User.findOne({ email: sampleUser.email });
+
+            const res = await request(app)
+                .delete(`/user/${user?._id}`)
+                .set('Authorization', `Bearer ${otherToken}`);
+
+            expect(res.status).toBe(403);
         });
     });
 
